@@ -27,6 +27,6 @@ class NewArticleNotification extends Mailable
     public function build()
     {
         return $this->subject('New Article Published: ' . $this->article->title)
-                    ->view('emails.new_article');
+                    ->text('emails.new_article_plain');
     }
 }
