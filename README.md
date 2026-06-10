@@ -10,16 +10,6 @@
   <em>Extra • Express • Exclusive</em>
 </p>
 
-<p align="center">
-  <a href="#features">Features</a> •
-  <a href="#requirements">Requirements</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#project-structure">Structure</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#license">License</a>
-</p>
-
 ---
 
 ## 🎯 About Khabar X
