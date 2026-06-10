@@ -66,6 +66,56 @@
             </div>
         </div>
 
+        {{-- Newsletter Subscription Section --}}
+        <div class="border-b border-gray-800/80 bg-gray-950/20">
+            <div class="container py-6">
+                <!-- Success/Error Messages -->
+                @if ($message = Session::get('success'))
+                    <div class="mb-4 p-3 rounded-lg bg-green-900/30 border border-green-700 text-green-200 text-sm" id="successMessage">
+                        <i class="fas fa-check-circle mr-2"></i>{{ $message }}
+                    </div>
+                @endif
+
+                @if ($errors->has('email'))
+                    <div class="mb-4 p-3 rounded-lg bg-red-900/30 border border-red-700 text-red-200 text-sm" id="errorMessage">
+                        <i class="fas fa-exclamation-circle mr-2"></i>{{ $errors->first('email') }}
+                    </div>
+                @endif
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-white text-base sm:text-lg font-semibold">हाम्रो न्यूजलेटर सदस्यता लिनुहोस्</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1">नवीनतम समाचार र अपडेटहरू सिधै तपाईंको इनबक्समा प्राप्त गर्नुहोस्।</p>
+                    </div>
+                    <div class="w-full md:w-auto max-w-md grow">
+                        <form action="{{ route('subscribe') }}" method="POST" class="flex gap-2">
+                            @csrf
+                            <input type="email" name="email" required placeholder="तपाईंको इमेल ठेगाना..." 
+                                value="{{ old('email') }}"
+                                class="bg-gray-800 border border-gray-700 text-white placeholder-gray-500 text-xs sm:text-sm rounded-lg focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] block w-full p-2.5 outline-none @error('email') border-red-500 @enderror">
+                            <button type="submit" class="bg-[var(--primary-color)] hover:opacity-95 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-lg transition whitespace-nowrap">
+                                सदस्यता लिनुहोस्
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Auto-hide success message after 5 seconds --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const successMsg = document.getElementById('successMessage');
+                if (successMsg) {
+                    setTimeout(function() {
+                        successMsg.style.transition = 'opacity 0.3s ease-out';
+                        successMsg.style.opacity = '0';
+                        setTimeout(() => successMsg.remove(), 300);
+                    }, 5000);
+                }
+            });
+        </script>
+
         {{-- Main footer --}}
         <div class="container py-8 sm:py-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">

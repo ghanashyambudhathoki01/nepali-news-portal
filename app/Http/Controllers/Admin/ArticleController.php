@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Subscriber;
 use App\Models\Category;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewArticleNotification;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -53,6 +56,11 @@ class ArticleController extends Controller
 
         $article->categories()->attach($request->categories);
 
+        // Send notification email to all subscribers
+        $subscribers = Subscriber::pluck('email')->toArray();
+        if (!empty($subscribers)) {
+            Mail::to($subscribers)->send(new NewArticleNotification($article));
+        }
         toast('Article Created Successfully', 'success');
         return redirect()->back();
     }

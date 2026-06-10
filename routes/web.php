@@ -22,6 +22,7 @@ Route::get("/article/{slug}", [PageController::class, "article"])->name("article
 Route::get("/province/{slug}", [PageController::class, "province"])->name("province");
 Route::get("/contact", [\App\Http\Controllers\Frontend\ContactController::class, "show"])->name("contact");
 Route::post("/contact", [\App\Http\Controllers\Frontend\ContactController::class, "store"])->name("contact.store");
+Route::post('/subscribe', [\App\Http\Controllers\Frontend\SubscriptionController::class, 'store'])->name('subscribe');
 
 
 
@@ -47,12 +48,15 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
         $categoryCount = \App\Models\Category::count();
         $articleCount = \App\Models\Article::count();
         $advertiseCount = \App\Models\Advertise::count();
-        return view('admin.dashboard', compact('messageCount', 'categoryCount', 'articleCount', 'advertiseCount'));
+        $subscriberCount = \App\Models\Subscriber::count();
+        return view('admin.dashboard', compact('messageCount', 'categoryCount', 'articleCount', 'advertiseCount', 'subscriberCount'));
     })->name('admin.dashboard');
     Route::resource("/category", CategoryController::class)->names('admin.category');
     Route::resource("/article", ArticleController::class)->names('admin.article');
     Route::resource("/advertise", AdvertiseController::class)->names('admin.advertise');
     Route::resource("/messages", \App\Http\Controllers\Admin\MessageController::class)->only(['index', 'show', 'destroy'])->names('admin.messages');
+    Route::get('/subscribers/export', [\App\Http\Controllers\Admin\SubscriberController::class, 'export'])->name('admin.subscribers.export');
+    Route::resource("/subscribers", \App\Http\Controllers\Admin\SubscriberController::class)->names('admin.subscribers');
 });
 
 require __DIR__ . '/auth.php';

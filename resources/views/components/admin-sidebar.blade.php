@@ -28,6 +28,10 @@
              <a href="{{ route('admin.messages.index') }}" class="nav-link">
                 <i data-feather="mail"></i><span>Messages</span></a>
          </li>
+         <li class="dropdown {{Request::routeIs('admin.subscribers*') ? 'active' : ''}}">
+             <a href="{{ route('admin.subscribers.index') }}" class="nav-link">
+                <i data-feather="users"></i><span>Subscribers</span></a>
+         </li>
          {{-- <li class="dropdown">
              <a href="#" class="menu-toggle nav-link has-dropdown"><i
                      data-feather="briefcase"></i><span>Widgets</span></a>
