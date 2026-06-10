@@ -48,6 +48,7 @@ class ArticleController extends Controller
             $image->move('images', $file_name);
             $article->image = "images/$file_name";
         }
+        $article->province = $request->province;
         $article->save();
 
         $article->categories()->attach($request->categories);
@@ -91,6 +92,7 @@ class ArticleController extends Controller
         $article->meta_description = $request->meta_description;
         $article->visible = $request->visible;
         $article->trending = $request->trending;
+        $article->province = $request->province;
         $image = $request->image;
         if ($image) {
             $file_name = time() . "." . $image->getClientOriginalExtension();

@@ -44,6 +44,23 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-2 col-6">
+                                <label for="province">Select Province (Optional)</label>
+                                <select name="province" id="province" class="form-control select2">
+                                    <option value="" {{ (old('province') ?? $article->province) == '' ? 'selected' : '' }}>None (National/International)</option>
+                                    <option value="koshi" {{ (old('province') ?? $article->province) == 'koshi' ? 'selected' : '' }}>कोशी प्रदेश (Koshi Province)</option>
+                                    <option value="madhesh" {{ (old('province') ?? $article->province) == 'madhesh' ? 'selected' : '' }}>मधेश प्रदेश (Madhesh Province)</option>
+                                    <option value="bagmati" {{ (old('province') ?? $article->province) == 'bagmati' ? 'selected' : '' }}>बागमती प्रदेश (Bagmati Province)</option>
+                                    <option value="gandaki" {{ (old('province') ?? $article->province) == 'gandaki' ? 'selected' : '' }}>गण्डकी प्रदेश (Gandaki Province)</option>
+                                    <option value="lumbini" {{ (old('province') ?? $article->province) == 'lumbini' ? 'selected' : '' }}>लुम्बिनी प्रदेश (Lumbini Province)</option>
+                                    <option value="karnali" {{ (old('province') ?? $article->province) == 'karnali' ? 'selected' : '' }}>कर्णाली प्रदेश (Karnali Province)</option>
+                                    <option value="sudurpashchim" {{ (old('province') ?? $article->province) == 'sudurpashchim' ? 'selected' : '' }}>सुदूरपश्चिम प्रदेश (Sudurpashchim Province)</option>
+                                </select>
+                                @error('province')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="mb-2 col-12">
                                 <label for="description">Description <span class="text-danger">*</span></label>
                                 <textarea name="description" id="description" class="form-control summernote">{{ old('description') ?? $article->description }}</textarea>

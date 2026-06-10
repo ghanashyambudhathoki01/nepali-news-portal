@@ -1,33 +1,95 @@
-@extends('admin.layouts.app')
-
-@section('content')
-<div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">ड्यासबोर्ड</h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Messages Card -->
-        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-            <div class="flex justify-center mb-4">
-                <i class="fa-solid fa-envelope text-4xl text-[var(--primary-color)]"></i>
-            </div>
-            <h2 class="text-xl font-semibold text-gray-700 mb-2">सम्पूर्ण सन्देशहरू</h2>
-            <p class="text-3xl font-bold text-[var(--primary-color)]">{{ $messageCount }}</p>
-        </div>
-        <!-- Categories Card -->
-        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-            <div class="flex justify-center mb-4">
-                <i class="fa-solid fa-folder-open text-4xl text-[var(--primary-color)]"></i>
-            </div>
-            <h2 class="text-xl font-semibold text-gray-700 mb-2">श्रेणीहरू</h2>
-            <p class="text-3xl font-bold text-[var(--primary-color)]">{{ $categoryCount }}</p>
-        </div>
+<x-app-layout>
+    <div class="row ">
         <!-- Articles Card -->
-        <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-            <div class="flex justify-center mb-4">
-                <i class="fa-solid fa-newspaper text-4xl text-[var(--primary-color)]"></i>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">लेखहरू</h5>
+                                    <h2 class="mb-3 font-30">{{ $articleCount }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="/assets/img/banner/1.png" alt="Articles">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h2 class="text-xl font-semibold text-gray-700 mb-2">लेखहरू</h2>
-            <p class="text-3xl font-bold text-[var(--primary-color)]">{{ $articleCount }}</p>
+        </div>
+
+        <!-- Categories Card -->
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">श्रेणीहरू</h5>
+                                    <h2 class="mb-3 font-30">{{ $categoryCount }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="/assets/img/banner/2.png" alt="Categories">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advertises Card -->
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">विज्ञापनहरू</h5>
+                                    <h2 class="mb-3 font-30">{{ $advertiseCount }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="/assets/img/banner/3.png" alt="Advertises">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Card -->
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">सन्देशहरू</h5>
+                                    <h2 class="mb-3 font-30">{{ $messageCount }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="/assets/img/banner/4.png" alt="Messages">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

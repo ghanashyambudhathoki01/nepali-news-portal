@@ -1,13 +1,13 @@
  <aside id="sidebar-wrapper">
      <div class="sidebar-brand">
-         <a href="{{ route('dashboard') }}">
+         <a href="{{ route('admin.dashboard') }}">
              <span class="logo-name">KhabarX</span>
          </a>
      </div>
      <ul class="sidebar-menu">
          <li class="menu-header">Main</li>
-         <li class="dropdown {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-             <a href="{{ route('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+         <li class="dropdown {{ Request::routeIs('admin.dashboard') || Request::routeIs('dashboard') ? 'active' : '' }}">
+             <a href="{{ route('admin.dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
          </li>
 
          <li class="dropdown {{Request::routeIs('admin.category*') ? 'active' : ''}}">

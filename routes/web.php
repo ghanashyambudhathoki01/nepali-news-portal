@@ -19,6 +19,7 @@ Route::get("/", [PageController::class, "home"])->name("home");
 Route::get("/category/{slug}", [PageController::class, "category"])->name("category");
 Route::get("/search", [PageController::class, "search"])->name("search");
 Route::get("/article/{slug}", [PageController::class, "article"])->name("article");
+Route::get("/province/{slug}", [PageController::class, "province"])->name("province");
 Route::get("/contact", [\App\Http\Controllers\Frontend\ContactController::class, "show"])->name("contact");
 Route::post("/contact", [\App\Http\Controllers\Frontend\ContactController::class, "store"])->name("contact.store");
 
@@ -26,7 +27,7 @@ Route::post("/contact", [\App\Http\Controllers\Frontend\ContactController::class
 
 // Breeze Route
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -45,7 +46,8 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
         $messageCount = \App\Models\Message::count();
         $categoryCount = \App\Models\Category::count();
         $articleCount = \App\Models\Article::count();
-        return view('admin.dashboard', compact('messageCount','categoryCount','articleCount'));
+        $advertiseCount = \App\Models\Advertise::count();
+        return view('admin.dashboard', compact('messageCount', 'categoryCount', 'articleCount', 'advertiseCount'));
     })->name('admin.dashboard');
     Route::resource("/category", CategoryController::class)->names('admin.category');
     Route::resource("/article", ArticleController::class)->names('admin.article');

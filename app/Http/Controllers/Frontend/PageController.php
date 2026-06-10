@@ -59,4 +59,31 @@ class PageController extends BaseController
         $page_advertises = Advertise::where("expire_date", ">=", date('Y-m-d'))->where('ad_position', 'pages')->get();
         return view('frontend.article', compact('article', 'page_advertises', 'related_news'));
     }
+
+    public function province($slug)
+    {
+        $provinceNames = [
+            'koshi' => 'कोशी प्रदेश',
+            'madhesh' => 'मधेश प्रदेश',
+            'bagmati' => 'बागमती प्रदेश',
+            'gandaki' => 'गण्डकी प्रदेश',
+            'lumbini' => 'लुम्बिनी प्रदेश',
+            'karnali' => 'कर्णाली प्रदेश',
+            'sudurpashchim' => 'सुदूरपश्चिम प्रदेश',
+        ];
+
+        if (!array_key_exists($slug, $provinceNames)) {
+            abort(404);
+        }
+
+        $provinceName = $provinceNames[$slug];
+        
+        $articles = Article::where('province', $slug)
+            ->where('visible', true)
+            ->latest()
+            ->paginate(8);
+
+        $page_advertises = Advertise::where("expire_date", ">=", date('Y-m-d'))->where('ad_position', 'pages')->get();
+        return view('frontend.province', compact('slug', 'provinceName', 'articles', 'page_advertises'));
+    }
 }

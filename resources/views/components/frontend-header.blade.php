@@ -49,8 +49,28 @@
                 </button>
 
                 {{-- Desktop / tablet nav links --}}
-                <div class="hidden sm:flex overflow-x-auto gap-4 md:gap-6 lg:gap-10 py-1 text-sm md:text-base whitespace-nowrap scrollbar-hide">
+                <div class="hidden sm:flex flex-wrap gap-4 md:gap-6 lg:gap-8 py-1 text-sm md:text-base whitespace-nowrap items-center">
                     <a href="{{ route('home') }}" class="hover:underline underline-offset-4 transition">गृह</a>
+
+                    {{-- Province Dropdown --}}
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" @click.outside="open = false" class="hover:underline underline-offset-4 transition flex items-center gap-1 focus:outline-none">
+                            प्रदेश <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div x-show="open" 
+                             x-transition
+                             class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 text-gray-800 z-[99999]"
+                             style="display: none;">
+                             <a href="{{ route('province', 'koshi') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">कोशी प्रदेश</a>
+                             <a href="{{ route('province', 'madhesh') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">मधेश प्रदेश</a>
+                             <a href="{{ route('province', 'bagmati') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">बागमती प्रदेश</a>
+                             <a href="{{ route('province', 'gandaki') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">गण्डकी प्रदेश</a>
+                             <a href="{{ route('province', 'lumbini') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">लुम्बिनी प्रदेश</a>
+                             <a href="{{ route('province', 'karnali') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">कर्णाली प्रदेश</a>
+                             <a href="{{ route('province', 'sudurpashchim') }}" class="block px-4 py-2 hover:bg-primary/10 hover:text-primary transition">सुदूरपश्चिम प्रदेश</a>
+                        </div>
+                    </div>
+
                     @foreach ($categories as $category)
                         <a href="{{ route('category', $category->slug) }}" class="hover:underline underline-offset-4 transition">{{ $category->title }}</a>
                     @endforeach
@@ -88,6 +108,26 @@
                 x-transition:leave-end="opacity-0 -translate-y-2"
                 class="sm:hidden mt-3 pb-2 border-t border-white/20 pt-3 flex flex-col gap-2 text-sm">
                 <a href="{{ route('home') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">गृह</a>
+
+                {{-- Province Accordion for Mobile --}}
+                <div x-data="{ open: false }" class="flex flex-col">
+                    <button @click="open = !open" class="py-1.5 px-2 rounded hover:bg-white/10 transition flex items-center justify-between text-left focus:outline-none">
+                        <span>प्रदेश</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div x-show="open" x-transition class="pl-4 mt-1 flex flex-col gap-1 border-l border-white/25 ml-2" style="display: none;">
+                         <a href="{{ route('province', 'koshi') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">कोशी प्रदेश</a>
+                         <a href="{{ route('province', 'madhesh') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">मधेश प्रदेश</a>
+                         <a href="{{ route('province', 'bagmati') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">बागमती प्रदेश</a>
+                         <a href="{{ route('province', 'gandaki') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">गण्डकी प्रदेश</a>
+                         <a href="{{ route('province', 'lumbini') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">लुम्बिनी प्रदेश</a>
+                         <a href="{{ route('province', 'karnali') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">कर्णाली प्रदेश</a>
+                         <a href="{{ route('province', 'sudurpashchim') }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">सुदूरपश्चिम प्रदेश</a>
+                    </div>
+                </div>
+
                 @foreach ($categories as $category)
                     <a href="{{ route('category', $category->slug) }}" class="py-1.5 px-2 rounded hover:bg-white/10 transition">{{ $category->title }}</a>
                 @endforeach
